@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/lukas/eclipse-workspace/PublicLib/spigot-api-1.16.5-R0.1-SNAPSHOT-shaded.jar" sourcepath="/home/lukas/eclipse-workspace/PublicLib/bukkit">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/home/lukas/eclipse-workspace/PublicLib/bukkit/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/lukas/eclipse-workspace/PublicLib/sqlite-jdbc-3.36.0.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

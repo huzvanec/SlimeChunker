@@ -1,0 +1,15 @@
+
+main: cz.zausima.slimechunker.SlimeChunker
+name: SlimeChunker
+version: 1.0
+api-version: 1.18
+author: XD_CZ
+description: Indicates whether a player is slimechunk or not
+website: programu.jeme.cz
+prefix: SlimeChunker
+commands:
+    slimechunk:
+      description: Indicates whether a player is slimechunk or not
+      usage: "Usage: /slimechunk"
+      permission: slimechunker.slimechunk
+      permission-message: "No permission! Ask the admin to grant it."
