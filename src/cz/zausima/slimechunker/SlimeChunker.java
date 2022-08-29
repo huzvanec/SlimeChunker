@@ -1,4 +1,4 @@
-package cz.jeme.programu.slimechunker;
+package cz.zausima.slimechunker;
 
 import java.util.Random;
 
