@@ -1,5 +1,4 @@
-
-main: cz.zausima.slimechunker.SlimeChunker
+main: cz.jeme.programu.slimechunker.SlimeChunker
 name: SlimeChunker
 version: 1.0
 api-version: 1.18
