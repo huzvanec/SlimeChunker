@@ -16,4 +16,4 @@ commands:
       description: Main SlimeChunker command
       usage: 'Usage: /slimechunker'
       permission: slimechunker.slimechunker
-      permission-message: You don't have the permission to controll the SlimeChunker plugin! Ask the admin to grant it.
+      permission-message: You don't have the permission to control the SlimeChunker plugin! Ask the admin to grant it.
