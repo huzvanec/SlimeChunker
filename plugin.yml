@@ -1,14 +1,14 @@
 main: cz.jeme.programu.slimechunker.SlimeChunker
 name: SlimeChunker
 version: 1.0
-api-version: 1.18
+api-version: 1.16
 author: XD_CZ
-description: Indicates whether a player is slimechunk or not
+description: A simple plugin for slimechunk checking
 website: programu.jeme.cz
 prefix: SlimeChunker
 commands:
     slimechunk:
-      description: Indicates whether a player is slimechunk or not
+      description: Checks for a slimechunk
       usage: "Usage: /slimechunk"
       permission: slimechunker.slimechunk
       permission-message: "No permission! Ask the admin to grant it."

@@ -6,11 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/lukas/eclipse-workspace/PublicLib/spigot-api-1.16.5-R0.1-SNAPSHOT-shaded.jar" sourcepath="/home/lukas/eclipse-workspace/PublicLib/bukkit">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/home/lukas/eclipse-workspace/PublicLib/bukkit/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/lukas/eclipse-workspace/PublicLib/sqlite-jdbc-3.36.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/spigot-api-1.16.5-R0.1-SNAPSHOT-shaded.jar" sourcepath="lib/spigot-api"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
