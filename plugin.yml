@@ -9,7 +9,7 @@ prefix: SlimeChunker
 commands:
    slimechunk:
       description: Checks for a slimechunk
-      usage: 'Usage: /slimechunker'
+      usage: 'Usage: /slimechunk'
       permission: slimechunker.slimechunk
       permission-message: You don't have the permission to check for slime chunks! Ask the admin to grant it.
    slimechunker:
