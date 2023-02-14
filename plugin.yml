@@ -1,6 +1,6 @@
 main: cz.jeme.programu.slimechunker.SlimeChunker
 name: SlimeChunker
-version: 2.0
+version: 2.0.1
 api-version: 1.16
 author: XD_CZ
 description: A simple plugin for slimechunk checking
