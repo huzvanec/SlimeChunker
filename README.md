@@ -3,7 +3,7 @@
 SlimeChunker is a simple and lightweight plugin which makes slime chunks easy to locate without needing to know the seed.
 
 ## Supported platforms
-Spigot based minecraft servers 1.16+ <br>
+Spigot based minecraft servers **1.16+** <br>
 Bukkit is **not** and will **not** be supported!
 
 ## How to use it?
