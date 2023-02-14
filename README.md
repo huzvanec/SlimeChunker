@@ -3,14 +3,12 @@
 SlimeChunker is a simple and lightweight plugin which makes slime chunks easy to locate without needing to know the seed.
 
 ## Supported platforms
-Spigot based minecraft servers <br>
+Spigot based minecraft servers **1.16+** <br>
 Bukkit is **not** and will **not** be supported!
 
 ## How to use it?
 ### Player
-Display your chunks using ```F3 + G```. Then use ```/slimechunk``` to determine, if the chunk you are standing in is a slime chunk or not. The response will be shown in chat. <br>
-**Example** <br>
-![example](https://skladu.jeme.cz/slimechunker/slimechunker.gif)
+Display your chunks using ```F3 + G```. Then use ```/slimechunk``` to determine, if the chunk you are standing in is a slime chunk or not. The response will be shown in chat.
 ### Admin
 **Permissions** <br>
 First, you need to grant ```slimechunker.slimechunk``` permission to players so they can use the ```/slimechunk``` command. You can do this using a permission plugin such as [Luck Perms](https://luckperms.net/). <br>
