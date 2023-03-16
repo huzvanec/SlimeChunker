@@ -73,7 +73,7 @@ public class Config {
 	private void setDefaults() {
 		String messageSectionName = sectionNames.get("MESSAGE") + ".";
 		configFileYaml.set(messageSectionName + sectionNames.get("YES"), "§2This is a slime chunk!");
-		configFileYaml.set(messageSectionName + sectionNames.get("NO"), "§4This isn't a slimechunk!");
+		configFileYaml.set(messageSectionName + sectionNames.get("NO"), "§4This isn't a slime chunk!");
 		configFileYaml.set(messageSectionName + sectionNames.get("WRONG ENVIROMENT"),
 				"§5There are no slime chunks in this dimension!");
 		try {
