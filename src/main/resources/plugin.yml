@@ -7,13 +7,13 @@ description: A simple plugin for slimechunk checking
 website: programu.jeme.cz
 prefix: SlimeChunker
 commands:
-   slimechunk:
-      description: Checks for a slimechunk
-      usage: 'Usage: /slimechunk'
-      permission: slimechunker.slimechunk
-      permission-message: You don't have the permission to check for slime chunks! Ask the admin to grant it.
-   slimechunker:
-      description: Main SlimeChunker command
-      usage: 'Usage: /slimechunker'
-      permission: slimechunker.slimechunker
-      permission-message: You don't have the permission to control the SlimeChunker plugin! Ask the admin to grant it.
+  slimechunk:
+    description: Checks for a slimechunk
+    usage: 'Usage: /slimechunk'
+    permission: slimechunker.slimechunk
+    permission-message: You don't have the permission to check for slime chunks! Ask the admin to grant it.
+  slimechunker:
+    description: Main SlimeChunker command
+    usage: 'Usage: /slimechunker'
+    permission: slimechunker.slimechunker
+    permission-message: You don't have the permission to control the SlimeChunker plugin! Ask the admin to grant it.
