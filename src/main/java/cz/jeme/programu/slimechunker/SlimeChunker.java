@@ -13,7 +13,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
 import java.util.logging.Level;
 
 public class SlimeChunker extends JavaPlugin implements Listener {
@@ -56,16 +55,12 @@ public class SlimeChunker extends JavaPlugin implements Listener {
         Player player = (Player) sender;
 
         Chunk chunk = player.getLocation().getChunk();
-        int chunkX = chunk.getX();
-        int chunkZ = chunk.getZ();
 
         World world = player.getWorld();
 
-        long seed = world.getSeed();
-
         String message;
         if (world.getEnvironment() == Environment.NORMAL) {
-            if (isSlimeChunk(chunkX, chunkZ, seed)) {
+            if (chunk.isSlimeChunk()) {
                 message = config.yesMessage;
             } else {
                 message = config.noMessage;
@@ -93,12 +88,6 @@ public class SlimeChunker extends JavaPlugin implements Listener {
             return;
         }
         sender.sendMessage(PREFIX + ChatColor.RED + "Unknown command!");
-    }
-
-    private boolean isSlimeChunk(int chunkX, int chunkZ, long seed) {
-        Random random = new Random(seed + ((long) chunkX * chunkX * 0x4c1906) + (chunkX * 0x5ac0dbL)
-                + (long) chunkZ * chunkZ * 0x4307a7L + (chunkZ * 0x5f24fL) ^ 0x3ad8025fL);
-        return random.nextInt(10) == 0;
     }
 
     public static void serverLog(Level level, String message) {
