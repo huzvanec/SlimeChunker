@@ -1,0 +1,59 @@
+# Plugin messages
+# For coloring use & or §
+# Please note that when using &, you have to surround the text in apostrophes
+messages:
+  # When the selected chunk is a slime chunk
+  is-a-slime-chunk: §2This is a slime chunk!
+  # When the selected chunk is not a slime chunk
+  not-a-slime-chunk: §4This isn't a slime chunk!
+  # When a player tries to detect slime chunks outside the overworld
+  wrong-dimension: §5There are no slime chunks in this dimension!
+  # When a player right clicks a block with an empty slime chunk map
+  # Slime chunk maps can't be created right clicking on a block because of container collision
+  map-right-click-block: §cRight click in the air to create slime maps!
+  # When a player tries to craft an item and has insufficient permission
+  crafting-not-allowed: §cYou are not allowed to craft this!
+  # When there are no slime chunks in the compass area
+  compass-no-slime-chunks: §cThere are no slime chunks in this area!
+
+# Custom plugin items
+items:
+  map:
+    enabled: true
+    name: Empty Slime Chunk Map
+    filled-name: Slime Chunk Map
+    lore: null
+    filled-lore: null
+    # Map text color in RGB
+    text-color:
+      - 0
+      - 200
+      - 0
+    # Slime chunks on filled map color byte id (see https://minecraft.fandom.com/wiki/Map_item_format#Full_color_tables)
+    map-color: 134 # emerald_block
+    # If slimechunker.items.map permission is required to craft the map
+    crafting:
+      require-permission: false
+      ingredients:
+        - M=map
+        - S=slime_ball
+      recipe:
+        - " S "
+        - "SMS"
+        - " S "
+  compass:
+    enabled: true
+    name: Slime Chunk Compass
+    lore:
+      - §cWorks only when held in hand!
+    # If slimechunker.items.compass permission is required to craft the compass
+    crafting:
+      require-permission: false
+      ingredients:
+        - C=compass
+        - S=slime_ball
+      recipe:
+        - " S "
+        - "SCS"
+        - " S "
+    max-chunk-area: 5
