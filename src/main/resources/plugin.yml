@@ -3,17 +3,12 @@ name: SlimeChunker
 version: 2.0.1
 api-version: 1.16
 author: XD_CZ
-description: A simple plugin for slimechunk checking
+description: A simple plugin for slime chunk checking
 website: programu.jeme.cz
 prefix: SlimeChunker
 commands:
   slimechunk:
-    description: Checks for a slimechunk
+    description: Checks for a slime chunk
     usage: 'Usage: /slimechunk'
     permission: slimechunker.slimechunk
     permission-message: You don't have the permission to check for slime chunks! Ask the admin to grant it.
-  slimechunker:
-    description: Main SlimeChunker command
-    usage: 'Usage: /slimechunker'
-    permission: slimechunker.slimechunker
-    permission-message: You don't have the permission to control the SlimeChunker plugin! Ask the admin to grant it.

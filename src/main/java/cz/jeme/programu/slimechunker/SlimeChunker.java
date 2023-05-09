@@ -1,36 +1,55 @@
 package cz.jeme.programu.slimechunker;
 
+import cz.jeme.programu.slimechunker.slimemap.SlimeChunkMapRunnable;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.World.Environment;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 
-public class SlimeChunker extends JavaPlugin implements Listener {
+public class SlimeChunker extends JavaPlugin {
 
     public static final String PREFIX = ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + ChatColor.BOLD + "SlimeChunker"
             + ChatColor.DARK_GRAY + "]: ";
 
-    private Config config;
+    public static ItemStack slimeChunkCompass = new ItemStack(Material.COMPASS);
+    public static ItemStack slimeChunkMap = new ItemStack(Material.MAP);
+
 
     @Override
     public void onEnable() {
-        config = new Config(getDataFolder());
+        saveDefaultConfig();
+        new Config(getDataFolder());
+
         PluginCommand slimechunk = getCommand("slimechunk");
-        PluginCommand slimechunker = getCommand("slimechunker");
         assert slimechunk != null : "Couldn't find slimechunk command!";
-        assert slimechunker != null : "Couldn't find slimechunker command!";
         slimechunk.setTabCompleter(new CommandTabCompleter());
-        slimechunker.setTabCompleter(new CommandTabCompleter());
+
+        PluginManager pluginManager = Bukkit.getPluginManager();
+        pluginManager.registerEvents(new EventListener(), this);
+
+        if (Config.yaml.getBoolean("items.compass.enabled")) {
+            new SlimeChunkCompassRunnable().runTaskTimer(this, 0L, 1L);
+            registerItem(slimeChunkCompass, "compass", "slime_chunk_compass");
+        }
+
+        if (Config.yaml.getBoolean("items.map.enabled")) {
+            new SlimeChunkMapRunnable().runTaskTimer(this, 0L, 1L);
+            registerItem(slimeChunkMap, "map", "slime_chunk_map");
+        }
     }
 
     @Override
@@ -38,10 +57,6 @@ public class SlimeChunker extends JavaPlugin implements Listener {
         String commandName = command.getName();
         if (commandName.equalsIgnoreCase("slimechunk")) {
             slimechunkCommand(sender);
-            return true;
-        }
-        if (commandName.equalsIgnoreCase("slimechunker")) {
-            slimechunkerCommand(sender, args);
             return true;
         }
         return false;
@@ -61,36 +76,59 @@ public class SlimeChunker extends JavaPlugin implements Listener {
         String message;
         if (world.getEnvironment() == Environment.NORMAL) {
             if (chunk.isSlimeChunk()) {
-                message = config.yesMessage;
+                message = Config.yaml.getString("messages.is-a-slime-chunk");
             } else {
-                message = config.noMessage;
+                message = Config.yaml.getString("messages.not-a-slime-chunk");
             }
         } else {
-            message = config.wrongEnviromentMessage;
+            message = Config.yaml.getString("messages.wrong-dimension");
         }
-        message = ChatColor.translateAlternateColorCodes('§', message);
-        message = ChatColor.translateAlternateColorCodes('&', message);
-        player.sendMessage(message);
+        if (message == null) throw new NullPointerException("message is null!");
+        player.sendMessage(translateColor(message));
     }
 
-    private void slimechunkerCommand(CommandSender sender, String[] args) {
-        if (args.length < 1) {
-            sender.sendMessage(PREFIX + ChatColor.RED + "Not enough arguments!");
-            return;
+    public void registerItem(ItemStack item, String name, String key) {
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
+        meta.setDisplayName(ChatColor.WHITE + translateColor(Config.yaml.getString("items." + name + ".name")));
+        List<String> lore = Config.yaml.getStringList("items." + name + ".lore");
+        List<String> loreTranslated = new ArrayList<>();
+        for (String loreLine : lore) {
+            loreTranslated.add(translateColor(loreLine));
         }
-        if (args.length > 1) {
-            sender.sendMessage(PREFIX + ChatColor.RED + "Too many arguments!");
-            return;
+        meta.setLore(loreTranslated);
+        item.setItemMeta(meta);
+
+        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(this, key), item);
+        List<String> crafting = Config.yaml.getStringList("items." + name + ".crafting.recipe");
+        recipe.shape(
+                crafting.get(0),
+                crafting.get(1),
+                crafting.get(2)
+        );
+        List<String> ingredients = Config.yaml.getStringList("items." + name + ".crafting.ingredients");
+        for (String ingredientLine : ingredients) {
+            String[] ingredient = ingredientLine.split("=");
+            Material material = Material.getMaterial(ingredient[1].toUpperCase());
+            if (material == null) throw new NullPointerException("Unknown material: " + ingredient[1]);
+            recipe.setIngredient(ingredient[0].charAt(0), material);
         }
-        if (args[0].equals("reload")) {
-            config.refreshConfig();
-            sender.sendMessage(PREFIX + ChatColor.GREEN + "Config reloaded!");
-            return;
-        }
-        sender.sendMessage(PREFIX + ChatColor.RED + "Unknown command!");
+        Bukkit.addRecipe(recipe);
     }
 
     public static void serverLog(Level level, String message) {
         Bukkit.getServer().getLogger().log(level, ChatColor.stripColor(PREFIX) + message);
+    }
+
+    public static boolean isSlimeChunk(long seed, int xBlock, int zBlock) {
+        int xChunk = xBlock >> 4;
+        int zChunk = zBlock >> 4;
+        Random random = new Random(seed + (xChunk * xChunk * 4987142) + (xChunk * 5947611) + (zChunk * zChunk) * 4392871L + (zChunk * 389711) ^ 0x3AD8025FL);
+        return (random.nextInt(10) == 0);
+    }
+
+    public static String translateColor(String string) {
+        String paragraph = ChatColor.translateAlternateColorCodes('§', string);
+        return ChatColor.translateAlternateColorCodes('&', paragraph);
     }
 }
