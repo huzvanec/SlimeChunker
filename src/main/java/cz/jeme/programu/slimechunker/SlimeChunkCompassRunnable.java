@@ -76,7 +76,7 @@ public class SlimeChunkCompassRunnable extends BukkitRunnable {
         }
         int currentX = currentChunk.getX();
         int currentZ = currentChunk.getZ();
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i < Config.yaml.getInt("items.compass.max-chunk-area"); i++) {
             List<Chunk> chunks = new ArrayList<>();
             int xi = currentX - i;
             int zi = currentZ + i - 1;
