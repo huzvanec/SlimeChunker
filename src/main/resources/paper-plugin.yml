@@ -1,0 +1,4 @@
+name: SlimeChunker
+version: '${project.version}'
+main: cz.jeme.programu.slimechunker.SlimeChunker
+api-version: '1.19'

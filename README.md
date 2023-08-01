@@ -9,9 +9,8 @@ seed.
 
 ## Supported platforms
 
-Spigot based minecraft servers **1.16+** <br>
-Bukkit is **not** and will **not** be supported!
-
+Spigot based minecraft servers **1.19.4+** <br>
+**Spigot and Bukkit are not supported!**
 ## Slime chunk maps
 
 ![image](https://raw.githubusercontent.com/Mandlemankiller/SlimeChunker/master/images/map_crafting.png)
@@ -27,9 +26,9 @@ Bukkit is **not** and will **not** be supported!
 
 Requirements: [Git](https://git-scm.com/), [Maven](https://maven.apache.org/) <br> <br>
 **Clone this repository** <br>
-```git clone https://github.com/Mandlemankiller/SlimeChunker.git``` <br>
+```git clone https://github.com/Mandlemankiller/SlimeChunker``` <br>
 **Move to the folder** <br>
-```cd Hibernator``` <br>
+```cd SlimeChunker``` <br>
 **Build** <br>
 ```mvn package``` <br>
 **Done!** <br>

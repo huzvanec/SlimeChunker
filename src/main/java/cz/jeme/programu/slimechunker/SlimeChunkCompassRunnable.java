@@ -1,8 +1,5 @@
 package cz.jeme.programu.slimechunker;
 
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -30,17 +27,16 @@ public class SlimeChunkCompassRunnable extends BukkitRunnable {
                 continue;
             }
             if (player.getWorld().getEnvironment() != World.Environment.NORMAL) {
-                String message = Config.yaml.getString("messages.map-right-click-block");
-                if (message == null) throw new NullPointerException("messages.map-right-click-block is null!");
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
+                String message = SlimeChunker.config.getString("messages.wrong-dimension");
+                if (message == null) throw new NullPointerException("messages.wrong-dimension is null!");
+                player.sendActionBar(Messages.from(message));
                 return;
             }
             Location coords = SlimeChunkCompassRunnable.findClosestSlimeChunkCoords(player);
             if (coords == null) {
-                String message = Config.yaml.getString("messages.compass-no-slime-chunks");
+                String message = SlimeChunker.config.getString("messages.compass-no-slime-chunks");
                 if (message == null) throw new NullPointerException("messages.compass-no-slime-chunks is null!");
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                        TextComponent.fromLegacyText(SlimeChunker.translateColor(message)));
+                player.sendActionBar(Messages.from(message));
                 return;
             }
 
@@ -49,13 +45,13 @@ public class SlimeChunkCompassRunnable extends BukkitRunnable {
             double x = coords.getX();
             double z = coords.getZ();
             String text = "X: " + x + "; Z: " + z + "; Distance: " + formatter.format(distance) + " blocks";
-            ChatColor chatColor;
+            String color;
             if (player.getLocation().getChunk().isSlimeChunk()) {
-                chatColor = ChatColor.GREEN;
+                color = "<green>";
             } else {
-                chatColor = ChatColor.RED;
+                color = "<red>";
             }
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(chatColor + text));
+            player.sendActionBar(Messages.from(color + text + Messages.getEscapeTag(color)));
         }
     }
 
@@ -65,7 +61,7 @@ public class SlimeChunkCompassRunnable extends BukkitRunnable {
     }
 
     public static boolean isSlimeChunkCompass(ItemStack item) {
-        return (item.isSimilar(SlimeChunker.slimeChunkCompass));
+        return (Namespaces.SLIME_CHUNK_COMPASS.has(item));
     }
 
     public static List<Chunk> findClosestSlimeChunks(Player player) {
@@ -76,7 +72,7 @@ public class SlimeChunkCompassRunnable extends BukkitRunnable {
         }
         int currentX = currentChunk.getX();
         int currentZ = currentChunk.getZ();
-        for (int i = 1; i < Config.yaml.getInt("items.compass.max-chunk-area"); i++) {
+        for (int i = 1; i < SlimeChunker.config.getInt("items.compass.max-chunk-area"); i++) {
             List<Chunk> chunks = new ArrayList<>();
             int xi = currentX - i;
             int zi = currentZ + i - 1;

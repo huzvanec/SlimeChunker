@@ -1,38 +1,40 @@
 # Plugin messages
-# For coloring use & or §
-# Please note that when using &, you have to surround the text in apostrophes
+# For coloring and formatting, use https://docs.advntr.dev/minimessage/
 messages:
   # When the selected chunk is a slime chunk
-  is-a-slime-chunk: §2This is a slime chunk!
+  is-a-slime-chunk: '<green>This is a slime chunk!</green>'
   # When the selected chunk is not a slime chunk
-  not-a-slime-chunk: §4This isn't a slime chunk!
+  not-a-slime-chunk: '<red>This is not a slime chunk!</red>'
   # When a player tries to detect slime chunks outside the overworld
-  wrong-dimension: §5There are no slime chunks in this dimension!
+  wrong-dimension: '<light_purple>There are no slime chunks in this dimension!</light_purple>'
   # When a player right clicks a block with an empty slime chunk map
   # Slime chunk maps can't be created right clicking on a block because of container collision
-  map-right-click-block: §cRight click in the air to create slime maps!
+  map-right-click-block: '<red>Right click in the air to create slime chunk maps!</red>'
   # When a player tries to craft an item and has insufficient permission
-  crafting-not-allowed: §cYou are not allowed to craft this!
+  crafting-not-allowed: '<red>You are not allowed to craft this!</red>'
   # When there are no slime chunks in the compass area
-  compass-no-slime-chunks: §cThere are no slime chunks in this area!
+  compass-no-slime-chunks: '<red>There are no slime chunks in this area!</red>'
 
 # Custom plugin items
 items:
   map:
     enabled: true
-    name: Empty Slime Chunk Map
-    filled-name: Slime Chunk Map
+    name: '<!italic>Empty Slime Chunk Map</!italic>'
+    filled-name: '<!italic>Slime Chunk Map</!italic>'
     lore: null
     filled-lore: null
     # Map text color in RGB
     text-color:
-      - 0
-      - 200
-      - 0
-    # Slime chunks on filled map color byte id (see https://minecraft.fandom.com/wiki/Map_item_format#Full_color_tables)
-    map-color: 134 # emerald_block
-    # If slimechunker.items.map permission is required to craft the map
+      r: 0
+      g: 200
+      b: 0
+    # Slime chunks on filled map color in rgb
+    map-color:
+      r: 0
+      g: 255
+      b: 0
     crafting:
+      # If slimechunker.items.map permission is required to craft the map
       require-permission: false
       ingredients:
         - M=map
@@ -43,11 +45,12 @@ items:
         - " S "
   compass:
     enabled: true
-    name: Slime Chunk Compass
+    name: '<!italic>Slime Chunk Compass</!italic>'
     lore:
-      - §cWorks only when held in hand!
-    # If slimechunker.items.compass permission is required to craft the compass
+      - '<!italic><red>Only works when held in hand!</red></!italic>'
+    max-chunk-area: 5
     crafting:
+      # If slimechunker.items.compass permission is required to craft the compass
       require-permission: false
       ingredients:
         - C=compass
@@ -56,4 +59,3 @@ items:
         - " S "
         - "SCS"
         - " S "
-    max-chunk-area: 5

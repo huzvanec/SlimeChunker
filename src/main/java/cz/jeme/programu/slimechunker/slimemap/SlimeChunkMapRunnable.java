@@ -1,11 +1,9 @@
 package cz.jeme.programu.slimechunker.slimemap;
 
-import cz.jeme.programu.slimechunker.Config;
-import cz.jeme.programu.slimechunker.EventListener;
-import net.md_5.bungee.api.ChatColor;
+import cz.jeme.programu.slimechunker.Namespaces;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
@@ -20,16 +18,12 @@ public class SlimeChunkMapRunnable extends BukkitRunnable {
     @Override
     public void run() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            ItemMeta meta = player.getInventory().getItemInMainHand().getItemMeta();
-            if (!(meta instanceof MapMeta)) return;
-            if (!((MapMeta) meta).hasMapView()) return;
-            MapView map = ((MapMeta) meta).getMapView();
-            String mapName = ChatColor.stripColor(Config.yaml.getString("items.map.filled-name"));
-            String itemName = ChatColor.stripColor(meta.getDisplayName());
-            if (!itemName.equals(mapName)) return;
-            if (meta.getCustomModelData() != EventListener.MAP_ID) return;
-            if (map == null) return;
+            ItemStack item = player.getInventory().getItemInMainHand();
+            if (!Namespaces.SLIME_CHUNK_FILLED_MAP.has(item)) return;
+            MapMeta meta = (MapMeta) item.getItemMeta();
+            MapView map = meta.getMapView();
             if (maps.contains(map)) return;
+            assert map != null;
             for (MapRenderer renderer : map.getRenderers()) {
                 if (renderer instanceof SlimeChunkMapRenderer) return;
             }
