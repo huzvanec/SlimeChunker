@@ -9,7 +9,7 @@ seed.
 
 ## Supported platforms
 
-Spigot based minecraft servers **1.19.4+** <br>
+Paper based minecraft servers **1.19.4+** <br>
 **Spigot and Bukkit are not supported!**
 ## Slime chunk maps
 
